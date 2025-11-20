@@ -1,0 +1,34 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: CloudFormation template to create an S3 bucket with encryption, public access blocking and optional versioning.
+# https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-s3-bucket.html
+# Parameters:
+#   BucketName:
+#     Type: String
+#     Description: Unique name for the S3 bucket, must be globally unique
+#   EnableVersioning:
+#     Type: String
+#     AllowedValues: [ "true", "false" ]
+#     Default: "false"
+#     Description: Enable versioning for the bucket, set to "true" to enable
+
+
+Resources:
+  S3Bucket:
+    Type: AWS::S3::Bucket
+    ## We dont need to supply anything, even bukcet name is optional
+    Properties:
+      BucketName: "s3-bucket-dm0test"
+      AccessControl: Private
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      Tags:
+        - Key: Name
+          Value:  "s3-bucket-dm0test"
+
+Outputs:
+  BucketName:
+    Description: Name of the created S3 bucket
+    Value:  "s3-bucket-dm0test"

@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+# Check if bucket name is provided
+if [ -z "${1:-}" ]; then
+    echo "No bucket name provided."
+    exit 1
+fi
+BUCKET_NAME=$1
+
+# where we will store files
+output_dir="tmp/s3-bash-scripts-put-object"
+
+mkdir -p "$output_dir"
+echo "Putting an object into an S3 bucket..."
+
+# we could make this random but why?
+NUM_FILES=5
+
+for (( i=1; i<=NUM_FILES; i++ )); do
+    FILE_PATH="$output_dir/file-$i.txt"
+    echo "This is file number $i" > "$FILE_PATH"
+
+    aws s3api put-object \
+        --bucket "$BUCKET_NAME" \
+        --key "file-$i.txt" \
+        --body "$FILE_PATH" \
+        --region eu-west-2
+
+    echo "Uploaded $FILE_PATH to s3://$BUCKET_NAME/file-$i.txt"
+done
+
+tree=$output_dir
+

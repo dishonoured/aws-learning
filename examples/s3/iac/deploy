@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+echo "Deploying cloud formation template..."
+
+STACK_NAME="s3-bucket-stack-$(date +%Y%m%d%H%M%S)"
+SCRIPT_DIR=$(cd $(dirname "$0") && pwd)
+TEMPLATE_FILE="$SCRIPT_DIR/template.yaml"
+
+aws cloudformation deploy \
+    --template-file $TEMPLATE_FILE \
+    --region eu-west-2 \
+    --stack-name $STACK_NAME 

@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+echo "Deleting an S3 bucket..."
+# Delete an S3 bucket
+# Check if bucket name is provided
+if [ -z "$1" ]; then
+    echo "No bucket name provided."
+    exit 1
+fi
+BUCKET_NAME=$1
+aws s3api delete-bucket \
+--bucket $BUCKET_NAME \
+--region eu-west-2 
