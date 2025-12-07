@@ -54,3 +54,6 @@ coverage/
 
 # Git metadata
 .gitignore
+
+# aws sam
+.aws-sam/*
