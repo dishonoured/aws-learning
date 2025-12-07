@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -e
+
+root_path=$(realpath .)
+template_path-"${root_path}/template.yml"
+
+
+echo "== SAM Build..."
+echo "Template Path: ${template_path}"
+sam build \
+ --template "${template_path}"

@@ -1,0 +1,12 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: An example template creating an SQS queue.
+Resources:
+  MyQueue:
+    Type: "AWS::SQS::Queue"
+    Properties:
+      QueueName: "MyExampleQueue"
+      VisibilityTimeout: 60
+      MessageRetentionPeriod: 86400
+      Tags:
+        - Key: "Environment"
+          Value: "Development"

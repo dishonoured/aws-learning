@@ -1,0 +1,13 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: An example template creating an SQS queue.
+Resources:
+  MyExampleFifoQueue:
+    Type: "AWS::SQS::Queue"
+    Properties:
+      QueueName: "MyExampleFifoQueue"
+      VisibilityTimeout: 60
+      FifoQueue: true
+      MessageRetentionPeriod: 86400
+      Tags:
+        - Key: "Environment"
+          Value: "Development"
